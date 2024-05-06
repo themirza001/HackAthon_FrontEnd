@@ -10,6 +10,7 @@ const DoctorCard = ({ img ,name,Specialization,email,regYear}) => {
                 <div className='relative text-center items-center bg-green-600 text-white mb-1 rounded-md pl-2 pr-2'>{email}</div>
                 <div className='relative text-center items-center bg-yellow-600 text-white mb-1 rounded-md pl-2 pr-2'>{regYear}</div>
             </div>
+            
         </div>
   )
 }
