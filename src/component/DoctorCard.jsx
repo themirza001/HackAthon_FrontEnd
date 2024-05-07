@@ -1,18 +1,37 @@
-import React from 'react'
+import React from 'react';
+import { Paper } from '@mui/material';
+import Carousel from 'react-material-ui-carousel';
 
-const DoctorCard = ({ img ,name,Specialization,email,regYear}) => {
+const DoctorCard = ({ doctors }) => {
   return (
-      <div className='w-52 h-auto rounded-xl bg-slate-300 gap-4 space-y-2 items-center text-center flex flex-col justify-between hover:border-10 hover:border-gray-900 hover:bg-slate-400 hover:text-white cursor-pointer'>
-            {img  && <img className='rounded-xl' src={img} alt="Course Logo" />} 
-            <div className='font-bold'>{name}</div>
-            <div>{Specialization}</div>
-            <div className='flex flex-row space-x-1 mb-2'>
-                <div className='relative text-center items-center bg-green-600 text-white mb-1 rounded-md pl-2 pr-2'>{email}</div>
-                <div className='relative text-center items-center bg-yellow-600 text-white mb-1 rounded-md pl-2 pr-2'>{regYear}</div>
-            </div>
-            
-        </div>
-  )
-}
+    <div className="flex justify-center items-center h-screen border-r-8 bg-slate-800">
+      <Carousel
+        className="w-full md:w-3/4 lg:w-1/2 xl:w-1/3" 
+        autoPlay={true} 
+        animation="slide" 
+        interval={3500} 
+      >
+        {
+          doctors?.map((doctor) => (
+            <Paper key={doctor.id} className="p-4 md:p-8">
+              <div className="flex flex-col md:flex-row items-center">
+                <div className="md:w-1/3 mr-0 md:mr-8 mb-4 md:mb-0">
+                  <img src={doctor.image} alt="" className="w-full h-auto rounded" />
+                </div>
+                <div className="md:w-2/3">
+                  <h4 className="text-xl font-bold mb-2">{doctor.name}</h4>
+                  <div className="mb-4">{doctor.Specialization}</div>
+                  <div>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Book Consultation</button>
+                  </div>
+                </div>
+              </div>
+            </Paper>
+          ))
+        }
+      </Carousel>
+    </div>
+  );
+};
 
-export default DoctorCard
+export default DoctorCard;
