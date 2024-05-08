@@ -10,6 +10,9 @@ import { useEffect, useState } from 'react';
 import Doctors from './pages/Doctors.jsx';
 import axios from 'axios';
 import { object } from 'prop-types';
+import DoctorsProfile from './pages/DoctorsProfile.jsx';
+import DoctorRegister from './pages/DoctorRegister.jsx';
+import UserRegister from './pages/UserRegister.jsx';
 
 function App() {
   const [doctors, setDoctors] = useState([]);
@@ -31,26 +34,15 @@ function App() {
   useEffect(() => {
     getDoctors();
   }, []);
-
-  // Log data outside the useEffect hook
-  useEffect(() => {
-    console.log(doctors); // This will log the updated data
-  }, [doctors]); // Add data as a dependency
-
   return (
-    <div>
-      <h1>Data from backend:</h1>
-      <div>
-        <ul>
-          {doctors?.map((doctors) => (
-            <div key={doctors.id}>
-              <li>{doctors.name}</li>
-              <li>{doctors.email}</li>
-            </div>
-          ))}
-        </ul>
-      </div>
-    </div>
+    <>
+    <Header />
+    <Routes>
+      <Route path='/doctors' element={<DoctorsProfile doctors={doctors} />} />
+      <Route path='/user-register' element={<UserRegister/>} />
+      <Route path='/doctor-register' element={<DoctorRegister/>} />
+    </Routes>
+    </>
   );
 }
 

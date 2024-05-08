@@ -1,10 +1,9 @@
 import React from 'react';
+import DoctorCard from '../component/DoctorCard';
 
 const DoctorsProfile = ({ doctors }) => {
-  return <div></div>;
-};
+  return(
+   <DoctorCard  doctors={doctors}/> 
+)};
 
 export default DoctorsProfile;
-{
-  doctors;
-}
