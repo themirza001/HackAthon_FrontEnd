@@ -2,7 +2,7 @@ import React from 'react';
 
 const UserRegister = () => {
   return (
-    <div div className=' bg-slate-900'>
+    <div className=' bg-slate-900'>
       <div className='flex justify-center items-center mb-4 mt-4'>
         <h1 className='bg-black text-white text-center text-3xl py-3 px-6 rounded-lg shadow-lg'>User Registration</h1>
       </div>

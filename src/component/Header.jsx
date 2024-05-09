@@ -1,125 +1,87 @@
 import React, { useState } from "react";
-import {
-  AppBar,
-  Box,
-  Divider,
-  Drawer,
-  IconButton,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-import Logo from "../assets/react.svg";
+import { Link } from 'react-router-dom';
 
-import MenuIcon from "@mui/icons-material/Menu";
-import { NavLink } from "react-router-dom";
-import '../styles/HeaderStyles.css'; // Import your custom CSS file
+import companyLogo from '../assets/images/logo1.svg';
 
 const Header = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  // Handle menu click
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
-  // Menu drawer
-  const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography
-        color={"goldenrod"}
-        variant="h6"
-        component="div"
-        sx={{ flexGrow: 1, my: 2 }}
-      >
-        <img src={Logo} alt="logo" className="h-16" />
-      </Typography>
-      <Divider />
-      <ul className="custom-f-class mobile-navigation">
-        <li>
-          <NavLink activeClassName="active" to={"/home"} className="custom-f-class text-white">
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to={"/menu"} className="custom-f-class text-white">Menu</NavLink>
-        </li>
-        <li>
-          <NavLink to={"/about"} className="custom-f-class text-white">About</NavLink>
-        </li>
-        <li>
-          <NavLink to={"/contact"} className="custom-f-class text-white">Contact</NavLink>
-        </li>
-      </ul>
-    </Box>
-  );
+  
+  const [toggleMenu, setToggleMenu] = useState(false);
 
   return (
-    <>
-      <Box>
-        <AppBar component={"nav"} sx={{ bgcolor: "black" }}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              sx={{
-                mr: 2,
-                display: { sm: "none" },
-              }}
-              onClick={handleDrawerToggle}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              color={"goldenrod"}
-              variant="h6"
-              component="div"
-              sx={{ flexGrow: 1 }}
-            >
-              <img src={Logo} alt="logo" className="h-16" />
-            </Typography>
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <ul className="flex flex-row gap-4">
-                <li>
-                  <NavLink activeClassName="active" to={"/"} className="text-white">
-                    Home
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to={"/menu"} className="text-white">Menu</NavLink>
-                </li>
-                <li>
-                  <NavLink to={"/about"} className="text-white">About</NavLink>
-                </li>
-                <li>
-                  <NavLink to={"/contact"} className="text-white">Contact</NavLink>
-                </li>
-              </ul>
-            </Box>
-          </Toolbar>
-        </AppBar>
-        <Box component="nav">
-          <Drawer
-            variant="temporary"
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            sx={{
-              display: { xs: "block", sm: "none" },
-              "& .MuiDrawer-paper": {
-                boxSizing: "border-box",
-                width: "240px",
-              },
-            }}
-          >
-            {drawer}
-          </Drawer>
-        </Box>
-        <Box>
-          <Toolbar />
-        </Box>
-      </Box>
-    </>
-  );
+    <nav className='relative container mx-auto p-6 bg-slate-700'>
+      {/* Flex Container */}
+      <div className='flex items-center justify-between'>
+        {/* Logo */}
+        <div className='pt-2'>
+  <img src={companyLogo} alt='' className='w-16 h-16 rounded-full' />
+</div>
+        {/* Menu Items */}
+        <div className='hidden space-x-6 md:flex'>
+          <Link to='#' className='hover:text-darkGrayishBlue'>
+            Feature1
+          </Link>
+          <Link to='#' className='hover:text-darkGrayishBlue'>
+            Feature2
+          </Link>
+          <Link to='#' className='hover:text-darkGrayishBlue'>
+            F7
+          </Link>
+          <Link to='#' className='hover:text-darkGrayishBlue'>
+            F3
+          </Link>
+          <Link to='#' className='hover:text-darkGrayishBlue'>
+            F4
+          </Link>
+        </div>
+        {/* Button */}
+        <div className='justify-center text-center gap-3 flex'>
+        <Link
+          to='/user-register'
+          className='hidden p-3 px-6 pt-2 text-white bg-rose-700 rounded-full baseline hover:bg-cyan-300 md:block'
+        >
+          Register
+        </Link>
+        <Link
+          to='/login'
+          className='hidden p-3 px-6 pt-2 text-white bg-rose-700 rounded-full baseline hover:bg-cyan-300 md:block'
+        >
+          Login
+        </Link>
+        </div>
+
+        {/* Hamburger Icon */}
+        <button
+          className={
+            toggleMenu
+              ? 'open block hamburger md:hidden focus:outline-none'
+              : 'block hamburger md:hidden focus:outline-none'
+          }
+          onClick={() => setToggleMenu(!toggleMenu)}
+        >
+          <span className='hamburger-top'></span>
+          <span className='hamburger-middle'></span>
+          <span className='hamburger-bottom'></span>
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      <div className='md:hidden'>
+        <div
+          className={
+            toggleMenu
+              ? 'absolute flex flex-col items-center self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md'
+              : 'absolute flex-col items-center hidden self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md'
+          }
+        >
+          <Link to='#'>Pricing</Link>
+          <Link to='#'>Product</Link>
+          <Link to='#'>About Us</Link>
+          <Link to='#'>Careers</Link>
+          <Link to='#'>Community</Link>
+        </div>
+      </div>
+    </nav>
+  )
 };
 
 export default Header;

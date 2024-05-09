@@ -1,47 +1,46 @@
 import { Route, Routes } from 'react-router-dom';
 import Header from './component/Header';
-import Menu from './pages/Menu';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Footer from './component/Footer';
-//import api from './api/axiosConfig.js';
-
 import { useEffect, useState } from 'react';
-import Doctors from './pages/Doctors.jsx';
 import axios from 'axios';
-import { object } from 'prop-types';
 import DoctorsProfile from './pages/DoctorsProfile.jsx';
 import DoctorRegister from './pages/DoctorRegister.jsx';
 import UserRegister from './pages/UserRegister.jsx';
+import Login from './pages/Login.jsx';
+import Home from './pages/Home.jsx';
+import Footer from './component/Footer.jsx';
 
 function App() {
-  const [doctors, setDoctors] = useState([]);
-  const getDoctors = async () => {
-    try {
-      await axios
-        .get('/api/v1/doctor')
-        .then((response) => {
-          console.log(response.data.data.doc);
-          setDoctors(response.data.data.doc);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getDoctors();
-  }, []);
+  const [doctors, setDoctors] = useState([""]);
+  // const getDoctors = async () => {
+  //   try {
+  //     await axios
+  //       .get('/api/v1/doctor')
+  //       .then((response) => {
+  //         console.log(response.data.data.doc);
+  //         setDoctors(response.data.data.doc);
+  //         console.log(doctors);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   getDoctors();
+  // }, []);
   return (
     <>
     <Header />
     <Routes>
+    <Route path='/' element={<Home />} />
       <Route path='/doctors' element={<DoctorsProfile doctors={doctors} />} />
       <Route path='/user-register' element={<UserRegister/>} />
       <Route path='/doctor-register' element={<DoctorRegister/>} />
+      <Route path='/login' element={<Login />} />
     </Routes>
+    <Footer />
     </>
   );
 }
