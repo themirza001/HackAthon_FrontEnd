@@ -8,6 +8,7 @@ import UserRegister from './pages/UserRegister.jsx';
 import Login from './pages/Login.jsx';
 import Home from './pages/Home.jsx';
 import Footer from './component/Footer.jsx';
+import DoctorsPage from './component/DoctorsPage.jsx';
 
 function App() {
   const [doctors, setDoctors] = useState([""]);
@@ -35,9 +36,9 @@ function App() {
     <Header />
     <Routes>
     <Route path='/' element={<Home />} />
-      <Route path='/doctors' element={<DoctorsProfile doctors={doctors} />} />
       <Route path='/user-register' element={<UserRegister/>} />
       <Route path='/doctor-register' element={<DoctorRegister/>} />
+      <Route path='doctorcard' element={<DoctorsPage />} />
       <Route path='/login' element={<Login />} />
     </Routes>
     <Footer />
