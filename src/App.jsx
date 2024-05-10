@@ -1,14 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 import Header from './component/Header';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import DoctorsProfile from './pages/DoctorsProfile.jsx';
 import DoctorRegister from './pages/DoctorRegister.jsx';
 import UserRegister from './pages/UserRegister.jsx';
 import Login from './pages/Login.jsx';
 import Home from './pages/Home.jsx';
 import Footer from './component/Footer.jsx';
 import DoctorsPage from './component/DoctorsPage.jsx';
+import DoctorsProfile from './DoctorPage/DoctorsProfile.jsx';
 
 function App() {
   const [doctors, setDoctors] = useState([""]);
@@ -40,6 +39,7 @@ function App() {
       <Route path='/doctor-register' element={<DoctorRegister/>} />
       <Route path='doctorcard' element={<DoctorsPage />} />
       <Route path='/login' element={<Login />} />
+      <Route path='/doctor/:id' element={<DoctorsProfile />} />
     </Routes>
     <Footer />
     </>

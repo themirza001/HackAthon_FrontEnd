@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import doctorsData from '../assets/DoctorsData/DoctorsData.js';
 import companyLogo from '../assets/images/logo1.svg';
 // import logo1 from 
 
 const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
+  const [newresList,setresList]=useState([]);
+  const[searchtext,setsearchtext]=useState("")
+  const [filteredreslist,setfilteredreslist]=useState([]);
 
   return (
     <nav className='relative container mx-auto p-6'>
@@ -36,14 +39,14 @@ const Header = () => {
             Saviours
           </Link>
         </div>
-        <div class="flex items-center justify-center">
-  <form class="flex">
-    <input type="text" class="rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="Search..." />
-    <button type="submit" class="px-4 rounded-r-lg bg-cyan-500 text-white border-cyan-500 border-t border-b border-r">
-      Search
-    </button>
-  </form>
-</div>
+        <div class="flex flex-col md:flex-row items-center justify-center">
+        <form class="flex">
+          <input type="text" class="rounded-l-lg p-3 w-96 border-t border-b border-l text-gray-800 border-gray-200 bg-white mb-2 md:mb-0 md:mr-0 md:border-r-0" placeholder="Search... for Hospital's, Doctors, specialization" />
+          <button type="submit" class="px-4 rounded-r-lg bg-cyan-500 text-white border-cyan-500 border-t border-b border-r">
+            Search
+          </button>
+        </form>
+      </div>
         
        
 

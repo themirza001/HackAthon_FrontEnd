@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Doctors = ({ doctors }) => {
-  return{
-
-  }
-   
+const Doctors = () => {
+  return(
+    <></>
+  
+  )
 };
 
 export default Doctors;
