@@ -1,16 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // Don't forget to import Link
 
-import login_doctor from "../assets/images/doctor_register.jpg";
+import login_patient from "../assets/images/patient.jpg";
 
-const DoctorRegister = () => {
+const PatientRegister = () => {
   return (
     <section className="h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
       <div className="md:w-1/3 max-w-sm">
-        <img src={login_doctor} alt="Sample image" />
+        <img src={login_patient} alt="Sample image" />
       </div>
       <div className="md:w-1/3 max-w-sm">
-        <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded" type="text" placeholder="Email Address" />
+      <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="name" placeholder="User Name" />
+      <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="Mobile" placeholder="Cell Phone Number" />
+        <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" placeholder="Email Address" />
         <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="password" placeholder="Password" />
         <div className="mt-4 flex justify-between font-semibold text-sm">
           <label className="flex text-slate-500 hover:text-slate-600 cursor-pointer">
@@ -24,7 +26,7 @@ const DoctorRegister = () => {
         </div>
         <div className='mt-4'>
           <span>Don't have account</span>
-          <Link to='/DoctorAcount' className="ml-20 mt-4 bg-blue-600 hover:bg-blue-700 px-2 py-2 text-white uppercase rounded text-xs tracking-wider">
+          <Link to='/PatientAcount' className="ml-20 mt-4 bg-blue-600 hover:bg-blue-700 px-2 py-2 text-white uppercase rounded text-xs tracking-wider">
             Create Acount
           </Link>
         </div>
@@ -33,4 +35,4 @@ const DoctorRegister = () => {
   );
 }
 
-export default DoctorRegister;
+export default PatientRegister;
