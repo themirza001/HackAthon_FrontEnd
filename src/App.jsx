@@ -8,6 +8,8 @@ import Home from './pages/Home.jsx';
 import Footer from './component/Footer.jsx';
 import DoctorsPage from './component/DoctorsPage.jsx';
 import DoctorsProfile from './DoctorPage/DoctorsProfile.jsx';
+import DoctorAcount from './pages/DoctorAcount.jsx';
+import PatientRegister from './pages/PatientRegister.jsx';
 
 function App() {
   const [doctors, setDoctors] = useState([""]);
@@ -35,11 +37,17 @@ function App() {
     <Header />
     <Routes>
     <Route path='/' element={<Home />} />
-      <Route path='/user-register' element={<UserRegister/>} />
-      <Route path='/doctor-register' element={<DoctorRegister/>} />
-      <Route path='doctorcard' element={<DoctorsPage />} />
-      <Route path='/login' element={<Login />} />
-      <Route path='/doctor/:id' element={<DoctorsProfile />} />
+    <Route path='/user-register' element={<UserRegister />} />
+
+<Route path='/DoctorRegister' element={<DoctorRegister />} />
+<Route path='/DoctorAcount' element={<DoctorAcount />} />
+<Route path='/PatientRegister' element={<PatientRegister />} />
+<Route path='/doctorcard' element={<DoctorsPage />} />
+<Route path='/login' element={<Login />} />
+<Route path='/doctor/:id' element={<DoctorsProfile />} />
+
+      
+
     </Routes>
     <Footer />
     </>
