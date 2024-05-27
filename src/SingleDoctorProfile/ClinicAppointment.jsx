@@ -2,20 +2,22 @@ import React from 'react';
 
 const ClinicAppointment = ({ location, price, timing, verified }) => {
   return (
-    <div className="flex flex-col space-y-2 border border-gray-200 rounded-md p-4">
-      <h3 className="text-lg font-bold">Clinic Appointment</h3>
+    <div className="flex flex-col space-y-4 border border-gray-200 rounded-lg p-6 bg-white shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out">
+      <h3 className="text-xl font-bold text-gray-800">Clinic Appointment</h3>
       <p className="text-sm text-gray-600">{location}</p>
       <div className="flex items-center space-x-2">
-        <span className="text-green-500 font-bold">₹{price}</span>
+        <span className="text-green-500 text-lg font-bold">₹{price}</span>
         <span className="text-sm text-gray-600">FREE</span>
       </div>
       <p className="text-sm text-gray-600">{timing}</p>
       {verified && (
         <p className="text-sm text-green-500">
-          <span className="mr-1">Max. 15 mins wait + </span> Verified details
+          <span className="mr-1">Max. 15 mins wait +</span> Verified details
         </p>
       )}
-      <button className="btn btn-primary">Book FREE Clinic Visit</button>
+      <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300">
+        Book FREE Clinic Visit
+      </button>
     </div>
   );
 };

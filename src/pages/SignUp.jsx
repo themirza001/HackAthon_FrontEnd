@@ -10,13 +10,13 @@ const Login = () => {
       </div>
       <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-6 sm:p-8">
         <Link
-          to='/DoctorRegister'
+          to='/doctor-register'
           className='p-3 px-6 pt-2 text-white bg-rose-700 rounded-full baseline hover:bg-cyan-300'
         >
           Doctor
         </Link>
         <Link
-          to='/PatientRegister'
+          to='/user-register'
           className='p-3 px-6 pt-2 text-white bg-rose-700 rounded-full baseline hover:bg-cyan-300'
         >
           Patient
