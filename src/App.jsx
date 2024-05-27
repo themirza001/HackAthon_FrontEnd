@@ -1,15 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
 import Header from './component/Header';
-import { useEffect, useState } from 'react';
-import DoctorRegister from './pages/DoctorRegister.jsx';
-import UserRegister from './pages/UserRegister.jsx';
-import Login from './pages/Login.jsx';
+import { useState } from 'react';
+import SignUp from './pages/SignUp.jsx';
 import Home from './pages/Home.jsx';
 import Footer from './component/Footer.jsx';
 import DoctorsPage from './component/DoctorsPage.jsx';
 import DoctorsProfile from './DoctorPage/DoctorsProfile.jsx';
-import DoctorAcount from './pages/DoctorAcount.jsx';
-import PatientRegister from './pages/PatientRegister.jsx';
+import DoctorAcount from './DoctorPage/DoctorAcount.jsx';
+import 'react-toastify/dist/ReactToastify.css';
+import UserLogin from './UserPage/UserLogin.jsx';
+import PatientSignup from './UserPage/PatientSignup.jsx';
+import DoctorLogin from './DoctorPage/DoctorLogin.jsx';
+import Chat from './component/Chat.jsx';
 
 function App() {
   const [doctors, setDoctors] = useState([""]);
@@ -35,20 +37,22 @@ function App() {
   return (
     <>
     <Header />
+   
     <Routes>
     <Route path='/' element={<Home />} />
-    <Route path='/user-register' element={<UserRegister />} />
-
-<Route path='/DoctorRegister' element={<DoctorRegister />} />
-<Route path='/DoctorAcount' element={<DoctorAcount />} />
-<Route path='/PatientRegister' element={<PatientRegister />} />
+    <Route path='/user-register' element={<PatientSignup />} />
 <Route path='/doctorcard' element={<DoctorsPage />} />
-<Route path='/login' element={<Login />} />
+<Route path='/select-signup' element={<SignUp />} />
+<Route path='/user-login' element={<UserLogin />} />
 <Route path='/doctor/:id' element={<DoctorsProfile />} />
+<Route path='/doctor-register' element={<DoctorAcount />} />
+<Route path='/doctor-login' element={<DoctorLogin />} />
+  <Route path='/chat' element={<Chat />} />
 
       
 
     </Routes>
+    
     <Footer />
     </>
   );
