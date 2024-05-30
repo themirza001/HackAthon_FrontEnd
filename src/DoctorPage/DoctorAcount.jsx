@@ -169,6 +169,13 @@ const DoctorAcount = () => {
               >
                 Reset
               </div>
+              <div> Have an account</div>
+              <button
+                  className="bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
+                  onClick={()=>navigate('/doctor-login')}
+                >
+                  Sign in
+                </button>
             </div>
           </>
         ) : (
@@ -303,6 +310,7 @@ const DoctorAcount = () => {
                 >
                   Reset
                 </button>
+                
               </div>
             </div>
           </section>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import loginimage from '../assets/images/eldery_treatment_05.jpg';
 
-const Register = () => {
+const Login = () => {
 
     return (
       <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
@@ -11,13 +11,13 @@ const Register = () => {
         </div>
         <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-6 sm:p-8">
           <Link
-            to='/doctor-register'
+            to='/doctor-login'
             className='p-3 px-6 pt-2 text-white bg-rose-700 rounded-full baseline hover:bg-cyan-300'
           >
             Doctor
           </Link>
           <Link
-            to='/user-register'
+            to='/user-login'
             className='p-3 px-6 pt-2 text-white bg-rose-700 rounded-full baseline hover:bg-cyan-300'
           >
             Patient
@@ -27,4 +27,4 @@ const Register = () => {
     );
   };
 
-export default Register
+export default Login

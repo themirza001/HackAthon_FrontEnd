@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { doctorLogin } from '../services/doctor-service'
 import { toast } from 'react-toastify'
 import { doctorDoLogin } from '../auth/doctorIndex'
+import { useNavigate } from 'react-router-dom'
 
 const DoctorLogin = () => {
 
@@ -10,6 +11,7 @@ const DoctorLogin = () => {
         password:'',
       })
     
+      const navigate=useNavigate();
     
       const handleChange=(e,property)=>{
         setLoginDetains(
@@ -27,7 +29,7 @@ const DoctorLogin = () => {
       .then((data)=>{
         toast.success("Successfully logged-in!!");
        doctorDoLogin(data,()=>{
-        console.log("Doctor data set to localStorage !!");
+        navigate('/');
        })
       })
       .catch((error)=>{
