@@ -1,9 +1,24 @@
-import { myAxios } from "./helper";
+import { myAxios } from './helper';
 
-export const userSignup=(user)=>{
-    return myAxios.post('api/v1/users/signup',user).then((response)=>response.data).catch((error)=>console.log(error));
-}
+export const userSignup = (user) => {
+  return myAxios
+    .post('api/v1/users/signup', user)
+    .then((response) => response.data)
+    .catch((error) => console.log(error));
+};
 
-export const userLogin=(loginDetails)=>{
-    return myAxios.post('api/v1/users/login',loginDetails).then((response)=>response.data).catch((error)=>console.log(error));
-}
+export const userLogin = (data) => {
+  return myAxios
+    .post('/api/v1/users/login', data)
+    .then((response) => response.data);
+};
+export const userLogout = (next) => {
+  return myAxios
+    .post('api/v1/users/logout')
+    .then((response) => {
+      response.data;
+      location.reload(true);
+      next();
+    })
+    .catch((error) => console.log(error));
+};

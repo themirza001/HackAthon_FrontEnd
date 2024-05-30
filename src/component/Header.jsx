@@ -5,7 +5,9 @@ import companyLogo from '../assets/images/logo1.svg';
 import { doUserLogout, isUserLoggedIn } from '../auth/userIndex';
 import { doDoctorLogout, isDoctorLoggedIn } from '../auth/doctorIndex';
 import { toast } from 'react-toastify';
-// import logo1 from 
+import { userLogout } from '../services/user_service';
+import { doctorLogout } from '../services/doctor-service';
+// import logo1 from
 
 const Header = () => {
   // if(isDoctorLoggedIn){
@@ -20,39 +22,51 @@ const Header = () => {
   // }
   // }
   const [toggleMenu, setToggleMenu] = useState(false);
-  const [newresList,setresList]=useState([]);
-  const[searchtext,setsearchtext]=useState("")
-  const [filteredreslist,setfilteredreslist]=useState([]);
-  const navigate=useNavigate();
+  const [newresList, setresList] = useState([]);
+  const [searchtext, setsearchtext] = useState('');
+  const [filteredreslist, setfilteredreslist] = useState([]);
+  const navigate = useNavigate();
 
-  const handleLogout=()=>{
-    if(isUserLoggedIn()){
-      doUserLogout(()=>{
-        toast.success("USER logged out")
-        navigate('/select-login')
+  const check = () => {
+    if (isUserLoggedIn() && !isDoctorLoggedIn()) return true;
+    else return false;
+  };
 
-      })
-    }else if(isDoctorLoggedIn()){
-      doDoctorLogout(()=>{
-        toast.success("DOCTOR logged out")
-        navigate('/select-login')
-      })
+  const handleLogout = () => {
+    if (isUserLoggedIn()) {
+      userLogout(() => {
+        doUserLogout(() => {
+          toast.success('USER logged out');
+          navigate('/select-login');
+        });
+      });
+    } else if (isDoctorLoggedIn()) {
+      doctorLogout(() => {
+        doDoctorLogout(() => {
+          toast.success('DOCTOR logged out');
+          navigate('/select-login');
+        });
+      });
+    } else {
+      toast.error('Already logged out');
     }
-    else{
-      toast.error("Already logged out");
-    }
-  }
+  };
   return (
     <nav className='relative container mx-auto p-6'>
       {/* Flex Container */}
       <div className='flex items-center justify-between'>
         {/* Logo */}
         <div className='pt-2'>
-  <img src={companyLogo} onClick={()=>navigate('/')} alt='' className='w-16 h-16 rounded-full' />
-</div>
+          <img
+            src={companyLogo}
+            onClick={() => navigate('/')}
+            alt=''
+            className='w-16 h-16 rounded-full'
+          />
+        </div>
         {/* Menu Items */}
         <div className='hidden space-x-6 md:flex'>
-        <Link to='#' className='hover:text-darkGrayishBlue'>
+          <Link to='#' className='hover:text-darkGrayishBlue'>
             Feature1
           </Link>
           <Link to='#' className='hover:text-darkGrayishBlue'>
@@ -64,40 +78,50 @@ const Header = () => {
           <Link to='#' className='hover:text-darkGrayishBlue'>
             F3
           </Link>
-          { isUserLoggedIn()  && 
-          <>
-          <Link to='/chat' className='hover:text-darkGrayishBlue'>
-            MediBuddy
-          </Link>
-          <Link to='/doctorcard' className='hover:text-darkGrayishBlue'>
-            Saviours
-          </Link>
-          </>}
+          {check() && (
+            <>
+              <Link to='/chat' className='hover:text-darkGrayishBlue'>
+                MediBuddy
+              </Link>
+              <Link to='/doctorcard' className='hover:text-darkGrayishBlue'>
+                Saviours
+              </Link>
+            </>
+          )}
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-center">
-        <form className="flex">
-          <input type="text" className="rounded-l-lg p-3 w-96 border-t border-b border-l text-gray-800 border-gray-200 bg-white mb-2 md:mb-0 md:mr-0 md:border-r-0" placeholder="Search... for Hospital's, Doctors, specialization" />
-          <button type="submit" className="px-4 rounded-r-lg bg-cyan-500 text-white border-cyan-500 border-t border-b border-r">
-            Search
-          </button>
-        </form>
-      </div>
-        
-       
+        <div className='flex flex-col md:flex-row items-center justify-center'>
+          <form className='flex'>
+            <input
+              type='text'
+              className='rounded-l-lg p-3 w-96 border-t border-b border-l text-gray-800 border-gray-200 bg-white mb-2 md:mb-0 md:mr-0 md:border-r-0'
+              placeholder="Search... for Hospital's, Doctors, specialization"
+            />
+            <button
+              type='submit'
+              className='px-4 rounded-r-lg bg-cyan-500 text-white border-cyan-500 border-t border-b border-r'
+            >
+              Search
+            </button>
+          </form>
+        </div>
 
         {/* Button */}
-        {(!isUserLoggedIn() && !isDoctorLoggedIn())  && 
-        <Link
-          to='/select-signup'
-          className='hidden p-3 px-6 pt-2 text-white bg-rose-700 rounded-full baseline hover:bg-cyan-300 md:block'
-        >
-          Login/signup
-        </Link>}
-        {
-          (isUserLoggedIn() || isDoctorLoggedIn()) &&
-          <button className='hidden p-3 px-6 pt-2 text-white bg-rose-700 rounded-full baseline hover:bg-cyan-300 md:block' onClick={handleLogout}>
-            Logout</button>
-        }
+        {!isUserLoggedIn() && !isDoctorLoggedIn() && (
+          <Link
+            to='/select-signup'
+            className='hidden p-3 px-6 pt-2 text-white bg-rose-700 rounded-full baseline hover:bg-cyan-300 md:block'
+          >
+            Login/signup
+          </Link>
+        )}
+        {(isUserLoggedIn() || isDoctorLoggedIn()) && (
+          <button
+            className='hidden p-3 px-6 pt-2 text-white bg-rose-700 rounded-full baseline hover:bg-cyan-300 md:block'
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        )}
 
         {/* Hamburger Icon */}
         <button
@@ -128,9 +152,12 @@ const Header = () => {
           <Link to='#'>About Us</Link>
           <Link to='#'>Careers</Link>
           <Link to='#'>Community</Link>
-          {(!isUserLoggedIn() && !isUserLoggedIn())  && <>
-          <Link to='/login'>Login</Link>
-          <Link to='/login'>Register</Link> </>}
+          {!isUserLoggedIn() && !isUserLoggedIn() && (
+            <>
+              <Link to='/login'>Login</Link>
+              <Link to='/login'>Register</Link>{' '}
+            </>
+          )}
         </div>
       </div>
     </nav>
@@ -138,8 +165,6 @@ const Header = () => {
 };
 
 export default Header;
-
-
 
 // import { useState } from 'react';
 // import { Link } from 'react-router-dom';
