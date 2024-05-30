@@ -72,8 +72,8 @@ const Header = () => {
           <Link to='#' className='hover:text-darkGrayishBlue'>
             Feature2
           </Link>
-          <Link to='#' className='hover:text-darkGrayishBlue'>
-            F7
+          <Link to='/medicine' className='hover:text-darkGrayishBlue'>
+            Medicine
           </Link>
           <Link to='#' className='hover:text-darkGrayishBlue'>
             F3

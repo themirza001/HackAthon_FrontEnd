@@ -14,6 +14,7 @@ import Chat from './component/Chat.jsx';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute.jsx';
 import Register from './component/Register.jsx';
 import Login from './component/Login.jsx';
+import Medicine from './Medicine/Medicine.jsx';
 
 function App() {
   const [doctors, setDoctors] = useState([""]);
@@ -47,6 +48,7 @@ function App() {
          <Route path='/select-signup' element={<Register />} />
          <Route path='/select-login' element={<Login />} />
          <Route path='/user-login' element={<UserLogin />} />
+         <Route path='/medicine' element={<Medicine />} />
          <Route path='/doctor/:id' element={<DoctorsProfile />} />
          <Route path='/doctor-register' element={<DoctorAcount />} />
          <Route path='/doctor-login' element={<DoctorLogin />} />
