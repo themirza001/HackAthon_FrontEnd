@@ -60,19 +60,25 @@ function Chat() {
   }
 
   return (
-    <div className="bg-white h-screen flex flex-col">
-      <div className="flex-1 overflow-auto p-3">
+    <div className="bg-gray-100 h-screen flex flex-col">
+      <div className="flex-1 overflow-auto p-4">
+        <div className="max-w-lg w-full sm:w-1/2 text-left align-bottom sm:pr-4">
+        <div className="bg-white p-4 rounded-md shadow-md mb-2 sm:mb-0">
+
+          <ReactMarkdown>Hello! How can I assist you today?</ReactMarkdown>
+          </div>
+          </div>
         {qaHistory.map((qa, index) => (
-          <div key={index} className="flex my-2">
-            <div className="max-w-xs w-full text-left align-bottom">
-              <div className="bg-gray-200 p-2 rounded-md mb-1">
-                <p className="font-semibold">Answer:</p>
+          <div key={index} className="flex flex-col sm:flex-row my-2">
+            <div className="max-w-lg w-full sm:w-1/2 text-left align-bottom sm:pr-4">
+              <div className="bg-white p-4 rounded-md shadow-md mb-2 sm:mb-0">
+                <p className="font-semibold text-gray-700">Answer:</p>
                 <ReactMarkdown>{qa.answer}</ReactMarkdown>
               </div>
             </div>
-            <div className="max-w-xs w-full text-right ml-auto align-top">
-              <div className="bg-blue-200 p-2 rounded-md">
-                <p className="font-semibold">Question:</p>
+            <div className="max-w-lg w-full sm:w-1/2 text-right ml-auto align-top sm:pl-4">
+              <div className="bg-blue-200 p-4 rounded-md shadow-md">
+                <p className="font-semibold text-gray-700">Question:</p>
                 <p>{qa.question}</p>
               </div>
             </div>
@@ -81,11 +87,11 @@ function Chat() {
       </div>
       <form
         onSubmit={generateAnswer}
-        className="p-3 flex justify-center items-center border-t mt-auto mb-3"
+        className="p-4 flex flex-col sm:flex-row justify-center items-center border-t bg-white"
       >
         <textarea
           required
-          className="border rounded w-full p-2"
+          className="border rounded w-full p-3 mb-3 sm:mb-0 sm:mr-3 flex-grow"
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           onKeyDown={handleKeyDown}
@@ -93,10 +99,10 @@ function Chat() {
         ></textarea>
         <button
           type="submit"
-          className="bg-blue-300 p-3 rounded-md hover:bg-blue-400 transition-all duration-300 ml-2"
+          className="bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 transition-all duration-300 sm:w-auto w-full"
           disabled={generatingAnswer}
         >
-          Send
+          {generatingAnswer ? "Generating..." : "Send"}
         </button>
       </form>
     </div>

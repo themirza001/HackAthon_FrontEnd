@@ -2,9 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import { userLogin } from '../services/user_service';
 import { toast } from 'react-toastify';
-import { doUserLogin } from '../auth/userIndex';
+import { doUserLogin, isUserLoggedIn } from '../auth/userIndex';
+import { useNavigate } from 'react-router-dom';
+import { isDoctorLoggedIn } from '../auth/doctorIndex';
 
 const UserLogin = () => {
+  const navigate=useNavigate();
   const[loginDetails,setLoginDetains]=useState({
     email:'',
     password:'',
@@ -27,7 +30,7 @@ const handleSubmit=(event)=>{
   .then((data)=>{
     toast.success("Successfully logged-in!!");
       doUserLogin(data,()=>{
-        console.log("User data saved to localStorage !!");
+        navigate('/')
       })
   })
   .catch((error)=>{
@@ -35,6 +38,14 @@ const handleSubmit=(event)=>{
     console.log(error);
   })
 }
+if(isUserLoggedIn() || isDoctorLoggedIn()){
+  return (
+    <div className='h-screen text-center font-bold bg-slate-600 justify-center'>
+      You Are Already Logged In !
+      <span>Kyu Backchodi krr rha</span>
+    </div>
+  )
+}else{
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
@@ -69,7 +80,7 @@ const handleSubmit=(event)=>{
         </form>
       </div>
     </div>
-  );
+  );}
 };
 
 export default UserLogin;

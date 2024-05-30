@@ -1,16 +1,47 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 //import doctorsData from '../assets/DoctorsData/DoctorsData.js';
 import companyLogo from '../assets/images/logo1.svg';
+import { doUserLogout, isUserLoggedIn } from '../auth/userIndex';
+import { doDoctorLogout, isDoctorLoggedIn } from '../auth/doctorIndex';
+import { toast } from 'react-toastify';
 // import logo1 from 
 
 const Header = () => {
+  // if(isDoctorLoggedIn){
+  //     doUserLogout(()=>{
+  //       toast.error('Logged-in as doctor')
+  //     })
+  // }else{
+  //   if(isUserLoggedIn){
+  //     doDoctorLogout(()=>{
+  //       toast.error('Logged-in as user')
+  //     })
+  // }
+  // }
   const [toggleMenu, setToggleMenu] = useState(false);
   const [newresList,setresList]=useState([]);
   const[searchtext,setsearchtext]=useState("")
   const [filteredreslist,setfilteredreslist]=useState([]);
   const navigate=useNavigate();
 
+  const handleLogout=()=>{
+    if(isUserLoggedIn()){
+      doUserLogout(()=>{
+        toast.success("USER logged out")
+        navigate('/select-login')
+
+      })
+    }else if(isDoctorLoggedIn()){
+      doDoctorLogout(()=>{
+        toast.success("DOCTOR logged out")
+        navigate('/select-login')
+      })
+    }
+    else{
+      toast.error("Already logged out");
+    }
+  }
   return (
     <nav className='relative container mx-auto p-6'>
       {/* Flex Container */}
@@ -33,12 +64,15 @@ const Header = () => {
           <Link to='#' className='hover:text-darkGrayishBlue'>
             F3
           </Link>
+          { isUserLoggedIn()  && 
+          <>
           <Link to='/chat' className='hover:text-darkGrayishBlue'>
             MediBuddy
           </Link>
           <Link to='/doctorcard' className='hover:text-darkGrayishBlue'>
             Saviours
           </Link>
+          </>}
         </div>
         <div className="flex flex-col md:flex-row items-center justify-center">
         <form className="flex">
@@ -52,12 +86,18 @@ const Header = () => {
        
 
         {/* Button */}
+        {(!isUserLoggedIn() && !isDoctorLoggedIn())  && 
         <Link
           to='/select-signup'
           className='hidden p-3 px-6 pt-2 text-white bg-rose-700 rounded-full baseline hover:bg-cyan-300 md:block'
         >
           Login/signup
-        </Link>
+        </Link>}
+        {
+          (isUserLoggedIn() || isDoctorLoggedIn()) &&
+          <button className='hidden p-3 px-6 pt-2 text-white bg-rose-700 rounded-full baseline hover:bg-cyan-300 md:block' onClick={handleLogout}>
+            Logout</button>
+        }
 
         {/* Hamburger Icon */}
         <button
@@ -88,8 +128,9 @@ const Header = () => {
           <Link to='#'>About Us</Link>
           <Link to='#'>Careers</Link>
           <Link to='#'>Community</Link>
+          {(!isUserLoggedIn() && !isUserLoggedIn())  && <>
           <Link to='/login'>Login</Link>
-          <Link to='/login'>Register</Link>
+          <Link to='/login'>Register</Link> </>}
         </div>
       </div>
     </nav>

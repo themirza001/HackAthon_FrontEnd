@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { userSignup } from '../services/user_service';
 import { toast } from 'react-toastify';
 import login_patient from "../assets/images/patient.jpg";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const PatientSignup = () => {
   const navigate=useNavigate()
   const [user, setUser] = useState({
@@ -95,12 +95,16 @@ const submitForm=(event)=>{
         placeholder="Confirm Password" 
 
         />
-        <div className="text-center md:text-left">
+        <div className="text-center md:text-left flex ">
           <button className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
            type="submit"
            onClick={(e)=>submitForm(e)}
            >
             Signup</button>
+            <div className='uppercase rounded text-xs tracking-wider '>
+              Have an account 
+              <Link to='/user-login' className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider">Login</Link>
+             </div>
         </div>
        
       </div>

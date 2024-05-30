@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Header from './component/Header';
 import { useState } from 'react';
-import SignUp from './pages/SignUp.jsx';
 import Home from './pages/Home.jsx';
 import Footer from './component/Footer.jsx';
 import DoctorsPage from './component/DoctorsPage.jsx';
@@ -12,6 +11,9 @@ import UserLogin from './UserPage/UserLogin.jsx';
 import PatientSignup from './UserPage/PatientSignup.jsx';
 import DoctorLogin from './DoctorPage/DoctorLogin.jsx';
 import Chat from './component/Chat.jsx';
+import ProtectedRoute from './ProtectedRoute/ProtectedRoute.jsx';
+import Register from './component/Register.jsx';
+import Login from './component/Login.jsx';
 
 function App() {
   const [doctors, setDoctors] = useState([""]);
@@ -40,17 +42,16 @@ function App() {
    
     <Routes>
     <Route path='/' element={<Home />} />
-    <Route path='/user-register' element={<PatientSignup />} />
-<Route path='/doctorcard' element={<DoctorsPage />} />
-<Route path='/select-signup' element={<SignUp />} />
-<Route path='/user-login' element={<UserLogin />} />
-<Route path='/doctor/:id' element={<DoctorsProfile />} />
-<Route path='/doctor-register' element={<DoctorAcount />} />
-<Route path='/doctor-login' element={<DoctorLogin />} />
-  <Route path='/chat' element={<Chat />} />
-
-      
-
+        <Route path='/user-register' element={<PatientSignup />} />
+         <Route path='/doctorcard' element={<DoctorsPage />} />
+         <Route path='/select-signup' element={<Register />} />
+         <Route path='/select-login' element={<Login />} />
+         <Route path='/user-login' element={<UserLogin />} />
+         <Route path='/doctor/:id' element={<DoctorsProfile />} />
+         <Route path='/doctor-register' element={<DoctorAcount />} />
+         <Route path='/doctor-login' element={<DoctorLogin />} />
+         <Route path='/chat' element={<ProtectedRoute element={<Chat />} allowedRoles={['user']} />} />
+         
     </Routes>
     
     <Footer />
