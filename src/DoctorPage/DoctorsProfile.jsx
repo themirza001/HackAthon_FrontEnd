@@ -1,16 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import SingleDoctorProfile from '../SingleDoctorProfile/SingleDoctorProfile';
-import doctorsData from '../assets/DoctorsData/DoctorsData.js';
 import ClinicAppointment from '../SingleDoctorProfile/ClinicAppointment.jsx';
 import ClinicDetails from '../SingleDoctorProfile/ClinicDetails.jsx';
 import SmallDoctorCard from '../component/SmallDoctorCard.jsx';
 import Reviews from '../component/Reviews.jsx';
+import { doctorsData } from '../services/doctor-service.js'; // Ensure this is correctly imported
 
 const DoctorsProfile = () => {
   const { id } = useParams();
-  const doctor = doctorsData.find(doctor => doctor.id === parseInt(id));
-  const otherDoctors = doctorsData.filter(doctor => doctor.id !== parseInt(id)); // Filter out the current doctor
+  const [doctors, setDoctors] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    doctorsData()
+      .then(data => {
+        console.log('Fetched doctors data:', data);
+        if (Array.isArray(data)) {
+          setDoctors(data);
+        } else {
+          console.error('Expected an array but got:', data);
+          setError('Failed to load doctor data.');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching doctors data:', error);
+        setError('Error fetching doctors data.');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  if (isLoading) {
+    return <div className="text-center">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center text-red-500">{error}</div>;
+  }
+
+  const doctor = doctors.find(doctor => doctor.id === id);
+  const otherDoctors = doctors.filter(doctor => doctor.id !== id); // Filter out the current doctor
 
   // Mock reviews data
   const reviews = [
