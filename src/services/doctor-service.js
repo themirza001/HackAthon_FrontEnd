@@ -8,3 +8,11 @@ export const doctorSignup=(doctor)=>{
 export const doctorLogin=(loginDetails)=>{
     return myAxios.post('api/v1/doctors/login',loginDetails).then((response)=>response.data);
 }
+export const doctorsData = () => {
+    return myAxios.get('/api/v1/doctors').then(response => response.data.data.doc);
+  };
+  
+  
+  
+
+
